@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Families | Mera Bhiriya</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+    <div class="logo">
+        🏡 Mera Bhiriya
+    </div>
+
+    <nav>
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/family">
+            ➕ Add Family
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- FAMILY DATA -->
+
+<section class="about">
+
+    <div class="heading">
+
+        <p>BHIRIYA VILLAGE</p>
+
+        <h2>
+            👨‍👩‍👧‍👦 Registered Families
+        </h2>
+
+    </div>
+
+
+
+    {% if families %}
+
+
+    <div class="service-grid">
+
+
+        {% for family in families %}
+
+
+        <div class="service-card">
+
+
+            <div class="icon">
+                👨‍👩‍👧‍👦
+            </div>
+
+
+            <h3>
+                {{ family["family_id"] }}
+            </h3>
+
+
+            <p>
+                <strong>
+                    Family Head:
+                </strong>
+
+                {{ family["head_name"] }}
+            </p>
+
+
+            <p>
+                <strong>
+                    Mobile:
+                </strong>
+
+                {{ family["mobile"] }}
+            </p>
+
+
+            <p>
+                <strong>
+                    Address:
+                </strong>
+
+                {{ family["address"] }}
+            </p>
+
+
+            <p>
+                <strong>
+                    Members:
+                </strong>
+
+                {{ family["members"] }}
+            </p>
+
+
+        </div>
+
+
+        {% endfor %}
+
+
+    </div>
+
+
+    {% else %}
+
+
+    <div class="about-box">
+
+        <h3>
+            No Family Data Found
+        </h3>
+
+        <p>
+            Abhi tak kisi family ka data add nahi hua hai.
+        </p>
+
+        <br>
+
+        <a href="/family" class="btn">
+            ➕ Add Family
+        </a>
+
+    </div>
+
+
+    {% endif %}
+
+
+</section>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>
+        🏡 Mera Bhiriya
+    </h3>
+
+    <p>
+        Digital Village Information & Complaint Portal
+    </p>
+
+    <p>
+        © 2026 Mera Bhiriya
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Family Data | Mera Bhiriya</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+    <div class="logo">
+        🏡 Mera Bhiriya
+    </div>
+
+    <nav>
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/families">
+            Family Data
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- FAMILY FORM -->
+
+<section class="about">
+
+    <div class="heading">
+
+        <p>BHIRIYA VILLAGE</p>
+
+        <h2>
+            👨‍👩‍👧‍👦 Family Data
+        </h2>
+
+    </div>
+
+
+    <div class="complaint-box">
+
+        <h3>
+            Apne Parivar Ki Basic Information
+        </h3>
+
+        <p>
+            Bhiriya ke parivar ki basic information
+            yahan submit karein.
+        </p>
+
+
+        <form action="/add-family" method="POST">
+
+
+            <label>
+                Family Head Name
+            </label>
+
+            <input
+                type="text"
+                name="head_name"
+                placeholder="Family head ka naam"
+                required
+            >
+
+
+            <label>
+                Mobile Number
+            </label>
+
+            <input
+                type="tel"
+                name="mobile"
+                placeholder="Mobile number"
+                required
+            >
+
+
+            <label>
+                Address
+            </label>
+
+            <textarea
+                name="address"
+                placeholder="House / Mohalla / Address"
+                required
+            ></textarea>
+
+
+            <label>
+                Family Members
+            </label>
+
+            <textarea
+                name="members"
+                placeholder="Family members ke naam likhein&#10;Example: Amit, Sunita, Rahul"
+                required
+            ></textarea>
+
+
+            <button type="submit">
+                💾 Save Family Data
+            </button>
+
+
+        </form>
+
+    </div>
+
+</section>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>
+        🏡 Mera Bhiriya
+    </h3>
+
+    <p>
+        Digital Village Information & Complaint Portal
+    </p>
+
+    <p>
+        © 2026 Mera Bhiriya
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Mera Bhiriya | Village Portal</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        /* ================= NAVIGATION KEYS ================= */
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links .key {
+            display: inline-block;
+            padding: 10px 16px;
+            background: #ffffff;
+            color: #222;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: 0 3px 0 #aaa;
+            transition: 0.2s;
+        }
+
+        .nav-links .key:hover {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #aaa;
+        }
+
+        /* Google Form Button */
+
+        .google-form-button {
+            background: #166534 !important;
+            color: white !important;
+            border-color: #166534 !important;
+            box-shadow: 0 3px 0 #14532d !important;
+        }
+
+        .google-form-button:hover {
+            background: #15803d !important;
+        }
+
+        .form-submit-card {
+            border: 2px solid #16a34a;
+        }
+
+        .form-submit-card .btn {
+            background: #16a34a;
+            color: white;
+        }
+
+        .form-submit-card .btn:hover {
+            background: #15803d;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 768px) {
+
+            .nav-links {
+                justify-content: center;
+            }
+
+            .nav-links .key {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="logo">
+        🏡 Mera Bhiriya
+    </div>
+
+
+    <nav class="nav-links">
+
+        <a href="/" class="key">
+            🏠 Home
+        </a>
+
+        <a href="/#about" class="key">
+            🏡 Gaon Ki Jankari
+        </a>
+
+        <a href="/#services" class="key">
+            ⚙️ Services
+        </a>
+
+        <a href="/complaint" class="key">
+            📢 Complaint
+        </a>
+
+        <a href="/#notices" class="key">
+            📋 Notices
+        </a>
+
+        <a href="/#contact" class="key">
+            📞 Contact
+        </a>
+
+        <!-- GOOGLE FORM BUTTON -->
+
+        <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSf_RuGeQi0lAY854gbRPZISqMjN-YxEWgyOJQ12HCwgZVP4vg/viewform?usp=sharing&ouid=100077409369973861881"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="key google-form-button"
+        >
+            📝 Family Data Submit
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <p class="welcome">
+            WELCOME TO
+        </p>
+
+        <h1>
+            BHIRIYA
+        </h1>
+
+        <h2>
+            Digital Village Portal
+        </h2>
+
+        <p>
+            Bhiriya gaon ki jankari, family information,
+            complaints aur important updates ek hi jagah.
+        </p>
+
+
+        <div class="buttons">
+
+            <a
+                href="#about"
+                class="btn"
+            >
+                🏘️ Gaon Ki Jankari
+            </a>
+
+
+            <a
+                href="/complaint"
+                class="btn complaint-button"
+            >
+                📢 Complaint Karein
+            </a>
+
+
+            <!-- GOOGLE FORM -->
+
+            <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSf_RuGeQi0lAY854gbRPZISqMjN-YxEWgyOJQ12HCwgZVP4vg/viewform?usp=sharing&ouid=100077409369973861881"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn"
+            >
+                📝 Family Data Submit
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     LOCATION
+===================================================== -->
+
+<section class="location">
+
+    <h2>
+        📍 Bhiriya Ki Location
+    </h2>
+
+
+    <div class="location-grid">
+
+
+        <div class="card">
+
+            <span>🏡</span>
+
+            <h3>
+                Village
+            </h3>
+
+            <p>
+                Bhiriya
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <span>🏢</span>
+
+            <h3>
+                Tehsil
+            </h3>
+
+            <p>
+                Shahabad
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <span>🏛️</span>
+
+            <h3>
+                Block
+            </h3>
+
+            <p>
+                Pihani
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <span>🗺️</span>
+
+            <h3>
+                District
+            </h3>
+
+            <p>
+                Hardoi
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ABOUT
+===================================================== -->
+
+<section
+    class="about"
+    id="about"
+>
+
+    <div class="heading">
+
+        <p>
+            ABOUT OUR VILLAGE
+        </p>
+
+        <h2>
+            🏡 Bhiriya Ke Baare Mein
+        </h2>
+
+    </div>
+
+
+    <div class="about-box">
+
+        <p>
+
+            Bhiriya Uttar Pradesh ke Hardoi district ke
+            Shahabad tehsil aur Pihani development block
+            ke kshetra mein sthit hamara gaon hai.
+
+        </p>
+
+
+        <p>
+
+            Is portal ka purpose gaon ki basic information,
+            family records, complaints aur important
+            announcements ko ek digital platform par
+            lana hai.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+
+<section
+    class="services"
+    id="services"
+>
+
+    <div class="heading">
+
+        <p>
+            OUR SERVICES
+        </p>
+
+        <h2>
+            🌐 Gaon Ki Services
+        </h2>
+
+    </div>
+
+
+    <div class="service-grid">
+
+
+        <!-- 1 -->
+
+        <div class="service-card">
+
+            <div class="icon">
+                🏘️
+            </div>
+
+            <h3>
+                Gaon Ki Jankari
+            </h3>
+
+            <p>
+                Bhiriya ke baare mein important
+                information dekhein.
+            </p>
+
+            <a
+                href="#about"
+                class="btn"
+            >
+                View Details
+            </a>
+
+        </div>
+
+
+
+        <!-- 2 -->
+
+        <div class="service-card">
+
+            <div class="icon">
+                👨‍👩‍👧‍👦
+            </div>
+
+            <h3>
+                Family Data
+            </h3>
+
+            <p>
+                Bhiriya ke registered parivaron ki
+                basic information admin ke through
+                manage ki jaati hai.
+            </p>
+
+            <a
+                href="/admin"
+                class="btn"
+            >
+                Admin Login
+            </a>
+
+        </div>
+
+
+
+        <!-- 3 GOOGLE FORM -->
+
+        <div class="service-card form-submit-card">
+
+            <div class="icon">
+                📝
+            </div>
+
+            <h3>
+                Apna Family Data Submit
+            </h3>
+
+            <p>
+                Apne parivar ki basic information
+                Google Form ke through submit karein.
+            </p>
+
+            <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSf_RuGeQi0lAY854gbRPZISqMjN-YxEWgyOJQ12HCwgZVP4vg/viewform?usp=sharing&ouid=100077409369973861881"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn"
+            >
+                📝 Open Google Form
+            </a>
+
+        </div>
+
+
+
+        <!-- 4 -->
+
+        <div class="service-card">
+
+            <div class="icon">
+                📢
+            </div>
+
+            <h3>
+                Complaint
+            </h3>
+
+            <p>
+                Road, water, electricity,
+                cleanliness aur other problems
+                ki complaint karein.
+            </p>
+
+            <br>
+
+            <a
+                href="/complaint"
+                class="btn"
+            >
+                📢 Complaint Karein
+            </a>
+
+        </div>
+
+
+
+        <!-- 5 -->
+
+        <div class="service-card">
+
+            <div class="icon">
+                🔎
+            </div>
+
+            <h3>
+                Track Complaint
+            </h3>
+
+            <p>
+                Complaint ID se apni complaint ka
+                current status check karein.
+            </p>
+
+            <br>
+
+            <a
+                href="/track"
+                class="btn"
+            >
+                🔎 Track Complaint
+            </a>
+
+        </div>
+
+
+
+        <!-- 6 -->
+
+        <div class="service-card">
+
+            <div class="icon">
+                📋
+            </div>
+
+            <h3>
+                Notice Board
+            </h3>
+
+            <p>
+                Bhiriya ke latest notices aur
+                important announcements dekhein.
+            </p>
+
+            <a
+                href="#notices"
+                class="btn"
+            >
+                📋 View Notices
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     NOTICE BOARD
+===================================================== -->
+
+<section
+    class="about"
+    id="notices"
+>
+
+    <div class="heading">
+
+        <p>
+            IMPORTANT UPDATES
+        </p>
+
+        <h2>
+            📋 Bhiriya Notice Board
+        </h2>
+
+    </div>
+
+
+    <div class="service-grid">
+
+
+        {% if notices %}
+
+
+            {% for notice in notices %}
+
+            <div class="service-card">
+
+                <div class="icon">
+                    📢
+                </div>
+
+
+                <h3>
+                    {{ notice["title"] }}
+                </h3>
+
+
+                <p>
+                    {{ notice["description"] }}
+                </p>
+
+
+                <small>
+                    📅 Published:
+                    {{ notice["created_at"] }}
+                </small>
+
+            </div>
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <div class="about-box">
+
+                <h3>
+                    📭 No Notices
+                </h3>
+
+                <p>
+                    Abhi Bhiriya ke liye koi latest
+                    notice available nahi hai.
+                </p>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     COMPLAINT
+===================================================== -->
+
+<section class="complaint">
+
+    <div class="heading">
+
+        <p>
+            VILLAGE COMPLAINT
+        </p>
+
+        <h2>
+            📢 Apni Complaint Karein
+        </h2>
+
+    </div>
+
+
+    <div class="complaint-box">
+
+        <h3>
+            Bhiriya Ki Problem Report Karein
+        </h3>
+
+        <p>
+            Road, water, electricity, cleanliness,
+            street light ya kisi bhi village problem
+            ko report karein.
+        </p>
+
+        <br>
+
+
+        <a
+            href="/complaint"
+            class="btn"
+        >
+            📝 Submit Complaint
+        </a>
+
+
+        <a
+            href="/track"
+            class="btn"
+        >
+            🔎 Track Complaint
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTACT
+===================================================== -->
+
+<section
+    class="contact"
+    id="contact"
+>
+
+    <div class="heading">
+
+        <p>
+            CONTACT
+        </p>
+
+        <h2>
+            📞 Important Contact
+        </h2>
+
+    </div>
+
+
+    <div class="contact-box">
+
+        <h3>
+            🏡 Mera Bhiriya
+        </h3>
+
+
+        <p>
+            <strong>Village:</strong>
+            Bhiriya
+        </p>
+
+
+        <p>
+            <strong>Tehsil:</strong>
+            Shahabad
+        </p>
+
+
+        <p>
+            <strong>Block:</strong>
+            Pihani
+        </p>
+
+
+        <p>
+            <strong>District:</strong>
+            Hardoi
+        </p>
+
+
+        <p>
+            <strong>State:</strong>
+            Uttar Pradesh
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <h3>
+        🏡 Mera Bhiriya
+    </h3>
+
+
+    <p>
+        Digital Village Information & Complaint Portal
+    </p>
+
+
+    <p>
+        © 2026 Mera Bhiriya
+    </p>
+
+</footer>
+
+
+
+</body>
+
+</html>

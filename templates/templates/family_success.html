@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Family Submitted | Mera Bhiriya</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <style>
+        .success-wrapper {
+            min-height: 78vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: calc(100% - 20px);
+
+            margin: 20px auto;
+        }
+
+        .success-card {
+            width: min(720px, 100%);
+
+            padding: 45px 30px;
+
+            text-align: center;
+
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.09),
+                    rgba(255,255,255,0.035)
+                );
+
+            border: 1px solid rgba(255,255,255,0.10);
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.35);
+
+            backdrop-filter: blur(18px);
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+
+            margin: 0 auto 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            font-size: 48px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #14b8a6,
+                    #0f766e
+                );
+
+            box-shadow:
+                0 18px 40px rgba(20,184,166,0.25);
+        }
+
+        .success-card h1 {
+            font-family: "Manrope", sans-serif;
+
+            font-size: clamp(30px, 5vw, 46px);
+
+            margin-bottom: 10px;
+
+            color: white;
+        }
+
+        .success-card p {
+            color: #a9bdc1;
+
+            line-height: 1.8;
+
+            max-width: 600px;
+
+            margin: auto;
+        }
+
+        .family-id-box {
+            margin: 28px auto;
+
+            padding: 22px;
+
+            max-width: 470px;
+
+            border-radius: 18px;
+
+            background: rgba(20,184,166,0.09);
+
+            border: 1px solid rgba(94,234,212,0.20);
+        }
+
+        .family-id-label {
+            color: #91a8ad;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 8px;
+        }
+
+        .family-id {
+            color: #fbbf24;
+
+            font-family: "Manrope", sans-serif;
+
+            font-size: clamp(25px, 5vw, 38px);
+
+            font-weight: 800;
+        }
+
+        .success-buttons {
+            display: flex;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+            margin-top: 25px;
+        }
+
+        @media (max-width: 600px) {
+            .success-card {
+                padding: 32px 18px;
+            }
+
+            .success-buttons {
+                flex-direction: column;
+            }
+
+            .success-buttons .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            🏡 Mera Bhiriya
+        </div>
+
+        <nav class="nav-links">
+
+            <a href="/" class="key">
+                🏠 Home
+            </a>
+
+            <a href="/complaint" class="key">
+                📢 Complaint
+            </a>
+
+            <a href="/track" class="key">
+                🔎 Track
+            </a>
+
+        </nav>
+
+    </header>
+
+    <div class="success-wrapper">
+
+        <div class="success-card">
+
+            <div class="success-icon">
+                ✅
+            </div>
+
+            <h1>
+                Family Data Submitted
+            </h1>
+
+            <p>
+                Aapka family data successfully
+                Mera Bhiriya Digital Village Portal
+                par submit ho gaya hai.
+            </p>
+
+            <div class="family-id-box">
+
+                <div class="family-id-label">
+                    Your Family ID
+                </div>
+
+                <div class="family-id">
+                    {{ family_id }}
+                </div>
+
+                <p style="margin-top: 8px;">
+                    📌 Is Family ID ko save karke rakhein.
+                </p>
+
+            </div>
+
+            <div class="success-buttons">
+
+                <a href="/" class="btn">
+                    🏠 Go to Home
+                </a>
+
+                <a href="/family" class="btn">
+                    📝 Add Another Family
+                </a>
+
+                <a href="/complaint" class="btn">
+                    📢 Complaint
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <strong>Mera Bhiriya</strong> • Digital Village Portal
+        <br>
+        Bhiriya • Shahabad • Pihani • Hardoi • Uttar Pradesh
+    </footer>
+
+</body>
+</html>

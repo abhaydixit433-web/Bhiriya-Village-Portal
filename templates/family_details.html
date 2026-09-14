@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Family Details | Mera Bhiriya</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #eef2ff;
+        }
+
+        .header {
+            background: #172554;
+            color: white;
+            text-align: center;
+            padding: 22px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 850px;
+            margin: 35px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+        }
+
+        .family-id {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 8px 14px;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+
+        h1 {
+            margin-top: 18px;
+        }
+
+        .detail {
+            padding: 16px;
+            margin-top: 12px;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+
+        .members {
+            white-space: pre-line;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .btn {
+            text-decoration: none;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .back {
+            background: #475569;
+        }
+
+        .edit {
+            background: #d97706;
+        }
+
+        .delete {
+            background: #dc2626;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="header">
+
+        <h1>🏡 Mera Bhiriya</h1>
+
+        <p>Family Details</p>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="card">
+
+            <span class="family-id">
+                {{ family["family_id"] }}
+            </span>
+
+            <h1>
+                👤 {{ family["head_name"] }}
+            </h1>
+
+            <div class="detail">
+
+                📱
+                <strong>Mobile Number:</strong>
+
+                <br>
+
+                {{ family["mobile"] }}
+
+            </div>
+
+
+            <div class="detail">
+
+                📍
+                <strong>Address:</strong>
+
+                <br>
+
+                {{ family["address"] }}
+
+            </div>
+
+
+            <div class="detail">
+
+                👨‍👩‍👧‍👦
+                <strong>Family Members:</strong>
+
+                <br><br>
+
+                <div class="members">
+                    {{ family["members"] }}
+                </div>
+
+            </div>
+
+
+            <div class="actions">
+
+                <a
+                    href="/families"
+                    class="btn back"
+                >
+                    ← Back
+                </a>
+
+                <a
+                    href="/admin/edit-family/{{ family['id'] }}"
+                    class="btn edit"
+                >
+                    ✏️ Edit Family
+                </a>
+
+                <form
+                    action="/admin/delete-family/{{ family['id'] }}"
+                    method="POST"
+                    onsubmit="
+                        return confirm(
+                            '⚠️ Kya aap is family ko permanently delete karna chahte hain?'
+                        );
+                    "
+                >
+
+                    <button
+                        type="submit"
+                        class="btn delete"
+                    >
+                        🗑️ Delete Family
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

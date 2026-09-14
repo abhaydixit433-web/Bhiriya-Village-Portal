@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Track Complaint | Mera Bhiriya</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        🏡 Mera Bhiriya
+    </div>
+
+    <nav>
+
+        <a href="/">Home</a>
+
+        <a href="/complaint">
+            New Complaint
+        </a>
+
+        <a href="/track">
+            Track Complaint
+        </a>
+
+    </nav>
+
+</header>
+
+
+<section class="about">
+
+    <div class="heading">
+
+        <p>BHIRIYA VILLAGE</p>
+
+        <h2>
+            🔎 Complaint Tracking
+        </h2>
+
+    </div>
+
+
+    <div class="complaint-box">
+
+        <h3>
+            Apni Complaint Ka Status Check Karein
+        </h3>
+
+        <p>
+            Apni Complaint ID enter karein.
+        </p>
+
+        <br>
+
+
+        <form action="/track-complaint"
+              method="POST">
+
+            <label>
+                Complaint ID
+            </label>
+
+            <input
+                type="text"
+                name="complaint_id"
+                placeholder="Example: BHR-0001"
+                required
+            >
+
+            <button type="submit">
+                🔎 Track Complaint
+            </button>
+
+        </form>
+
+    </div>
+
+
+    {% if searched %}
+
+        {% if complaint %}
+
+        <div class="complaint-box">
+
+            <h3>
+                📋 Complaint Details
+            </h3>
+
+            <br>
+
+            <p>
+                <strong>Complaint ID:</strong>
+                {{ complaint["complaint_id"] }}
+            </p>
+
+            <p>
+                <strong>Name:</strong>
+                {{ complaint["name"] }}
+            </p>
+
+            <p>
+                <strong>Category:</strong>
+                {{ complaint["category"] }}
+            </p>
+
+            <p>
+                <strong>Problem:</strong>
+                {{ complaint["description"] }}
+            </p>
+
+            <br>
+
+            <h3>
+                Complaint Status
+            </h3>
+
+            <br>
+
+
+            {% if complaint["status"] == "Pending" %}
+
+                <h2>
+                    🟡 Pending
+                </h2>
+
+                <p>
+                    Aapki complaint receive ho gayi hai.
+                </p>
+
+
+            {% elif complaint["status"] == "In Progress" %}
+
+                <h2>
+                    🔵 In Progress
+                </h2>
+
+                <p>
+                    Aapki complaint par kaam chal raha hai.
+                </p>
+
+
+            {% elif complaint["status"] == "Resolved" %}
+
+                <h2>
+                    🟢 Resolved
+                </h2>
+
+                <p>
+                    Aapki complaint resolve kar di gayi hai.
+                </p>
+
+
+            {% else %}
+
+                <h2>
+                    📋 {{ complaint["status"] }}
+                </h2>
+
+            {% endif %}
+
+        </div>
+
+
+        {% else %}
+
+        <div class="complaint-box">
+
+            <h3>
+                ❌ Complaint Not Found
+            </h3>
+
+            <p>
+                Ye Complaint ID database mein nahi mili.
+            </p>
+
+            <p>
+                Example:
+                <strong>BHR-0001</strong>
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    {% endif %}
+
+</section>
+
+
+<footer>
+
+    <h3>
+        🏡 Mera Bhiriya
+    </h3>
+
+    <p>
+        Digital Village Information & Complaint Portal
+    </p>
+
+    <p>
+        © 2026 Mera Bhiriya
+    </p>
+
+</footer>
+
+</body>
+
+</html>

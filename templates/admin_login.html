@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | Mera Bhiriya</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        🏡 Mera Bhiriya
+    </div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/complaint">Complaint</a>
+        <a href="/track">Track Complaint</a>
+    </nav>
+
+</header>
+
+
+<section class="about">
+
+    <div class="heading">
+
+        <p>ADMIN PANEL</p>
+
+        <h2>🔐 Admin Login</h2>
+
+    </div>
+
+
+    <div class="complaint-box">
+
+        <h3>Admin Login</h3>
+
+        <p>
+            Sirf authorized administrator hi
+            admin panel access kar sakta hai.
+        </p>
+
+        <br>
+
+        {% if error %}
+
+        <div class="about-box">
+
+            <p>❌ {{ error }}</p>
+
+        </div>
+
+        <br>
+
+        {% endif %}
+
+
+        <form action="/admin-login" method="POST">
+
+            <label>Username</label>
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Admin username"
+                required
+            >
+
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Admin password"
+                required
+            >
+
+
+            <button type="submit">
+                🔐 Login
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <h3>🏡 Mera Bhiriya</h3>
+
+    <p>
+        Digital Village Information & Complaint Portal
+    </p>
+
+    <p>
+        © 2026 Mera Bhiriya
+    </p>
+
+</footer>
+
+</body>
+
+</html>

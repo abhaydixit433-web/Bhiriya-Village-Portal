@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Complaint | Mera Bhiriya</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="logo">
+        🏡 Mera Bhiriya
+    </div>
+
+    <nav>
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/family">
+            Family Data
+        </a>
+
+        <a href="/families">
+            Families
+        </a>
+
+        <a href="/complaint">
+            Complaint
+        </a>
+
+        <a href="/complaints">
+            Track Complaint
+        </a>
+
+    </nav>
+
+</header>
+
+
+<section class="about">
+
+    <div class="heading">
+
+        <p>
+            BHIRIYA VILLAGE
+        </p>
+
+        <h2>
+            📢 Village Complaint
+        </h2>
+
+    </div>
+
+
+    <div class="complaint-box">
+
+        <h3>
+            Apni Problem Report Karein
+        </h3>
+
+        <p>
+            Bhiriya ki kisi bhi problem ko yahan report karein.
+        </p>
+
+
+        <form action="/add-complaint"
+              method="POST">
+
+
+            <label>
+                Your Name
+            </label>
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Apna naam"
+                required
+            >
+
+
+            <label>
+                Mobile Number
+            </label>
+
+            <input
+                type="tel"
+                name="mobile"
+                placeholder="Mobile number"
+                required
+            >
+
+
+            <label>
+                Complaint Category
+            </label>
+
+            <select name="category"
+                    required>
+
+                <option value="">
+                    -- Select Category --
+                </option>
+
+                <option value="Road">
+                    🛣️ Road
+                </option>
+
+                <option value="Water">
+                    💧 Water
+                </option>
+
+                <option value="Electricity">
+                    ⚡ Electricity
+                </option>
+
+                <option value="Cleanliness">
+                    🧹 Cleanliness
+                </option>
+
+                <option value="Street Light">
+                    💡 Street Light
+                </option>
+
+                <option value="School">
+                    🏫 School
+                </option>
+
+                <option value="Health">
+                    🏥 Health
+                </option>
+
+                <option value="Drainage">
+                    🚰 Drainage
+                </option>
+
+                <option value="Other">
+                    📌 Other
+                </option>
+
+            </select>
+
+
+            <label>
+                Problem Description
+            </label>
+
+            <textarea
+                name="description"
+                placeholder="Apni problem detail mein likhein..."
+                rows="6"
+                required
+            ></textarea>
+
+
+            <button type="submit">
+                📢 Submit Complaint
+            </button>
+
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <h3>
+        🏡 Mera Bhiriya
+    </h3>
+
+    <p>
+        Digital Village Information & Complaint Portal
+    </p>
+
+    <p>
+        © 2026 Mera Bhiriya
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

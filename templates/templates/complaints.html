@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Complaints | Mera Bhiriya</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+
+<header class="navbar">
+
+    <div class="logo">
+        🏡 Mera Bhiriya
+    </div>
+
+    <nav>
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/complaint">
+            New Complaint
+        </a>
+
+        <a href="/complaints">
+            Track Complaint
+        </a>
+
+    </nav>
+
+</header>
+
+
+<section class="about">
+
+    <div class="heading">
+
+        <p>
+            BHIRIYA VILLAGE
+        </p>
+
+        <h2>
+            📋 Complaint Status
+        </h2>
+
+    </div>
+
+
+    {% if complaints %}
+
+    <div class="service-grid">
+
+
+        {% for complaint in complaints %}
+
+        <div class="service-card">
+
+            <div class="icon">
+                📢
+            </div>
+
+            <h3>
+                {{ complaint["complaint_id"] }}
+            </h3>
+
+            <p>
+                <strong>Name:</strong>
+                {{ complaint["name"] }}
+            </p>
+
+            <p>
+                <strong>Category:</strong>
+                {{ complaint["category"] }}
+            </p>
+
+            <p>
+                <strong>Problem:</strong>
+                {{ complaint["description"] }}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                {{ complaint["status"] }}
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+    {% else %}
+
+
+    <div class="about-box">
+
+        <h3>
+            No Complaints Found
+        </h3>
+
+        <p>
+            Abhi tak koi complaint submit nahi hui hai.
+        </p>
+
+        <br>
+
+        <a href="/complaint"
+           class="btn">
+
+            📢 Submit Complaint
+
+        </a>
+
+    </div>
+
+
+    {% endif %}
+
+</section>
+
+
+<footer>
+
+    <h3>
+        🏡 Mera Bhiriya
+    </h3>
+
+    <p>
+        Digital Village Information & Complaint Portal
+    </p>
+
+    <p>
+        © 2026 Mera Bhiriya
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

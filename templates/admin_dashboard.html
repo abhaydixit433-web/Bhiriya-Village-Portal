@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Dashboard | Mera Bhiriya</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f3f6fb;
+            color: #222;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 16px 5%;
+            background: #172554;
+            color: white;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .navbar nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .navbar nav a {
+            color: white;
+            text-decoration: none;
+            padding: 9px 13px;
+            border-radius: 7px;
+            border: 1px solid rgba(255,255,255,0.25);
+            transition: 0.2s;
+        }
+
+        .navbar nav a:hover {
+            background: rgba(255,255,255,0.14);
+        }
+
+        /* =========================
+           DASHBOARD
+        ========================= */
+
+        .dashboard {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .admin-header h1 {
+            margin-bottom: 8px;
+        }
+
+        /* =========================
+           STAT CARDS
+        ========================= */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(auto-fit, minmax(180px, 1fr));
+
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow:
+                0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .stat-card .icon {
+            font-size: 32px;
+        }
+
+        .stat-card h2 {
+            font-size: 30px;
+            margin: 10px;
+        }
+
+        .stat-card p {
+            margin: 5px;
+            font-weight: bold;
+        }
+
+        .click-text {
+            display: block;
+            margin-top: 12px;
+            font-size: 12px;
+            color: #555;
+        }
+
+        /* =========================
+           ADMIN BOX
+        ========================= */
+
+        .admin-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow:
+                0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .admin-box h2 {
+            margin-top: 0;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .admin-box input,
+        .admin-box textarea,
+        .admin-box select {
+
+            width: 100%;
+
+            padding: 12px;
+
+            margin: 8px 0 18px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 8px;
+
+            box-sizing: border-box;
+
+            font-size: 15px;
+        }
+
+        .admin-box textarea {
+            resize: vertical;
+        }
+
+        .admin-box button {
+
+            padding: 11px 20px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            background: #222;
+
+            color: white;
+
+            font-size: 14px;
+        }
+
+        .admin-box button:hover {
+            opacity: 0.85;
+        }
+
+        /* =========================
+           MANAGEMENT BUTTONS
+        ========================= */
+
+        .button-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        .manage-family-btn,
+        .family-request-btn {
+
+            display: inline-block;
+
+            padding: 12px 20px;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            transition: 0.2s;
+        }
+
+        .manage-family-btn {
+            background: #222;
+        }
+
+        .family-request-btn {
+            background: #15803d;
+        }
+
+        .manage-family-btn:hover,
+        .family-request-btn:hover {
+            opacity: 0.85;
+            transform: translateY(-1px);
+        }
+
+        /* =========================
+           NOTICE / COMPLAINT
+        ========================= */
+
+        .notice-card,
+        .complaint-card {
+
+            border: 1px solid #ddd;
+
+            padding: 20px;
+
+            border-radius: 12px;
+
+            margin-top: 15px;
+
+            background: #fff;
+        }
+
+        .notice-card h3,
+        .complaint-card h3 {
+            margin-top: 0;
+        }
+
+        /* =========================
+           DELETE BUTTON
+        ========================= */
+
+        .delete-btn {
+            background: #d32f2f !important;
+            margin-top: 10px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .dashboard {
+                width: 94%;
+                margin: 30px auto;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .stat-card {
+                padding: 18px 10px;
+            }
+
+            .stat-card h2 {
+                font-size: 25px;
+            }
+
+            .navbar {
+                justify-content: center;
+                text-align: center;
+            }
+
+            .navbar nav {
+                justify-content: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="logo">
+        🏡 Mera Bhiriya
+    </div>
+
+
+    <nav>
+
+        <a href="/">
+            🏠 Home
+        </a>
+
+        <a href="/complaint">
+            📢 Complaint
+        </a>
+
+        <a href="/track">
+            🔎 Track
+        </a>
+
+        <a href="/families">
+            👨‍👩‍👧‍👦 Families
+        </a>
+
+        <a href="/family-requests">
+            🆕 Family Requests
+        </a>
+
+        <a href="/admin-logout">
+            🚪 Logout
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<section class="dashboard">
+
+
+    <!-- HEADER -->
+
+    <div class="admin-header">
+
+        <h1>
+            🔐 Admin Dashboard
+        </h1>
+
+        <p>
+            Mera Bhiriya Village Management Panel
+        </p>
+
+    </div>
+
+
+
+    <!-- =================================================
+         STATISTICS
+    ================================================== -->
+
+    <div class="stats-grid">
+
+
+        <!-- TOTAL FAMILIES -->
+
+        <a
+            href="/families"
+            class="stat-card"
+        >
+
+            <div class="icon">
+                👨‍👩‍👧‍👦
+            </div>
+
+            <h2>
+                {{ total_families }}
+            </h2>
+
+            <p>
+                Total Families
+            </p>
+
+            <span class="click-text">
+                👆 Click to Manage
+            </span>
+
+        </a>
+
+
+
+        <!-- TOTAL COMPLAINTS -->
+
+        <a
+            href="/complaints"
+            class="stat-card"
+        >
+
+            <div class="icon">
+                📢
+            </div>
+
+            <h2>
+                {{ total_complaints }}
+            </h2>
+
+            <p>
+                Total Complaints
+            </p>
+
+            <span class="click-text">
+                👆 Click to View
+            </span>
+
+        </a>
+
+
+
+        <!-- PENDING -->
+
+        <a
+            href="/complaints?status=Pending"
+            class="stat-card"
+        >
+
+            <div class="icon">
+                🟡
+            </div>
+
+            <h2>
+                {{ pending_complaints }}
+            </h2>
+
+            <p>
+                Pending
+            </p>
+
+            <span class="click-text">
+                👆 Click to View
+            </span>
+
+        </a>
+
+
+
+        <!-- IN PROGRESS -->
+
+        <a
+            href="/complaints?status=In%20Progress"
+            class="stat-card"
+        >
+
+            <div class="icon">
+                🔵
+            </div>
+
+            <h2>
+                {{ progress_complaints }}
+            </h2>
+
+            <p>
+                In Progress
+            </p>
+
+            <span class="click-text">
+                👆 Click to View
+            </span>
+
+        </a>
+
+
+
+        <!-- RESOLVED -->
+
+        <a
+            href="/complaints?status=Resolved"
+            class="stat-card"
+        >
+
+            <div class="icon">
+                🟢
+            </div>
+
+            <h2>
+                {{ resolved_complaints }}
+            </h2>
+
+            <p>
+                Resolved
+            </p>
+
+            <span class="click-text">
+                👆 Click to View
+            </span>
+
+        </a>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         FAMILY MANAGEMENT
+    ================================================== -->
+
+    <div class="admin-box">
+
+        <h2>
+            👨‍👩‍👧‍👦 Family Management
+        </h2>
+
+        <p>
+            Bhiriya ke existing family records ko
+            search, view, edit aur delete karein.
+        </p>
+
+
+        <div class="button-row">
+
+            <a
+                href="/families"
+                class="manage-family-btn"
+            >
+                🔎 Open Family Management
+            </a>
+
+
+            <a
+                href="/family-requests"
+                class="family-request-btn"
+            >
+                🆕 New Family Requests
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         GOOGLE SHEET FAMILY REQUEST
+    ================================================== -->
+
+    <div class="admin-box">
+
+        <h2>
+            📝 Google Form Family Requests
+        </h2>
+
+        <p>
+            Google Form se jo naye family records aaye hain,
+            unko yahan verify karke approve karein.
+        </p>
+
+        <a
+            href="/family-requests"
+            class="family-request-btn"
+        >
+            🆕 Open Family Requests
+        </a>
+
+    </div>
+
+
+
+    <!-- =================================================
+         ADD NOTICE
+    ================================================== -->
+
+    <div class="admin-box">
+
+        <h2>
+            📋 Add New Notice
+        </h2>
+
+        <p>
+            Yahan se Bhiriya ke liye announcement add karein.
+        </p>
+
+
+        <form
+            action="/admin/add-notice"
+            method="POST"
+        >
+
+            <label>
+                Notice Title
+            </label>
+
+            <input
+                type="text"
+                name="title"
+                placeholder="Example: Gram Sabha Meeting"
+                required
+            >
+
+
+            <label>
+                Notice Description
+            </label>
+
+            <textarea
+                name="description"
+                rows="5"
+                placeholder="Notice ki detail likhein..."
+                required
+            ></textarea>
+
+
+            <button type="submit">
+                📢 Publish Notice
+            </button>
+
+        </form>
+
+    </div>
+
+
+
+    <!-- =================================================
+         ALL NOTICES
+    ================================================== -->
+
+    <div class="admin-box">
+
+        <h2>
+            📋 All Notices
+        </h2>
+
+
+        {% if notices %}
+
+
+            {% for notice in notices %}
+
+
+            <div class="notice-card">
+
+                <h3>
+                    📢 {{ notice["title"] }}
+                </h3>
+
+                <p>
+                    {{ notice["description"] }}
+                </p>
+
+                <small>
+                    📅 Published:
+                    {{ notice["created_at"] }}
+                </small>
+
+
+                <form
+                    action="/admin/delete-notice/{{ notice['id'] }}"
+                    method="POST"
+                    onsubmit="
+                        return confirm(
+                            '⚠️ Kya aap is notice ko delete karna chahte hain?'
+                        );
+                    "
+                >
+
+                    <button
+                        type="submit"
+                        class="delete-btn"
+                    >
+                        🗑️ Delete Notice
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <p>
+                📭 Abhi koi notice nahi hai.
+            </p>
+
+
+        {% endif %}
+
+    </div>
+
+
+
+    <!-- =================================================
+         LATEST COMPLAINTS
+    ================================================== -->
+
+    <div class="admin-box">
+
+        <h2>
+            📢 Latest Complaints
+        </h2>
+
+
+        {% if complaints %}
+
+
+            {% for complaint in complaints %}
+
+
+            <div class="complaint-card">
+
+                <h3>
+                    {{ complaint["complaint_id"] }}
+                </h3>
+
+
+                <p>
+
+                    <strong>
+                        Name:
+                    </strong>
+
+                    {{ complaint["name"] }}
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Mobile:
+                    </strong>
+
+                    {{ complaint["mobile"] }}
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Category:
+                    </strong>
+
+                    {{ complaint["category"] }}
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Problem:
+                    </strong>
+
+                    {{ complaint["description"] }}
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Status:
+                    </strong>
+
+                    {{ complaint["status"] }}
+
+                </p>
+
+
+                {% if complaint["complaint_date"] %}
+
+                <p>
+
+                    <strong>
+                        📅 Date:
+                    </strong>
+
+                    {{ complaint["complaint_date"] }}
+
+                </p>
+
+                {% endif %}
+
+
+                <!-- UPDATE STATUS -->
+
+                <form
+                    action="/admin/update-status/{{ complaint['complaint_id'] }}"
+                    method="POST"
+                >
+
+                    <select name="status">
+
+                        <option
+                            value="Pending"
+                            {% if complaint["status"] == "Pending" %}
+                            selected
+                            {% endif %}
+                        >
+                            🟡 Pending
+                        </option>
+
+
+                        <option
+                            value="In Progress"
+                            {% if complaint["status"] == "In Progress" %}
+                            selected
+                            {% endif %}
+                        >
+                            🔵 In Progress
+                        </option>
+
+
+                        <option
+                            value="Resolved"
+                            {% if complaint["status"] == "Resolved" %}
+                            selected
+                            {% endif %}
+                        >
+                            🟢 Resolved
+                        </option>
+
+                    </select>
+
+
+                    <button type="submit">
+                        Update Status
+                    </button>
+
+                </form>
+
+
+            </div>
+
+
+            {% endfor %}
+
+
+        {% else %}
+
+
+            <p>
+                📭 Abhi koi complaint nahi hai.
+            </p>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <h3>
+        🏡 Mera Bhiriya
+    </h3>
+
+    <p>
+        Digital Village Information & Complaint Portal
+    </p>
+
+    <p>
+        © 2026 Mera Bhiriya
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>

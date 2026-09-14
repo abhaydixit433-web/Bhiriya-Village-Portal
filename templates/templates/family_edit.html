@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Family | Mera Bhiriya</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+        }
+
+        .header {
+            background: #172554;
+            color: white;
+            text-align: center;
+            padding: 22px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 700px;
+            margin: 35px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 7px 25px rgba(0,0,0,0.10);
+        }
+
+        .family-id {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-top: 18px;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .save {
+            background: #15803d;
+        }
+
+        .cancel {
+            background: #475569;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="header">
+
+        <h1>🏡 Mera Bhiriya</h1>
+
+        <p>Edit Family Data</p>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="card">
+
+            <div class="family-id">
+                {{ family["family_id"] }}
+            </div>
+
+
+            <form
+                action="/admin/update-family/{{ family['id'] }}"
+                method="POST"
+            >
+
+                <label>
+                    👤 Family Head Name
+                </label>
+
+                <input
+                    type="text"
+                    name="head_name"
+                    value="{{ family['head_name'] }}"
+                    required
+                >
+
+
+                <label>
+                    📱 Mobile Number
+                </label>
+
+                <input
+                    type="tel"
+                    name="mobile"
+                    value="{{ family['mobile'] }}"
+                    required
+                >
+
+
+                <label>
+                    📍 Address
+                </label>
+
+                <textarea
+                    name="address"
+                    required
+                >{{ family["address"] }}</textarea>
+
+
+                <label>
+                    👨‍👩‍👧‍👦 Family Members
+                </label>
+
+                <textarea
+                    name="members"
+                    required
+                >{{ family["members"] }}</textarea>
+
+
+                <div class="buttons">
+
+                    <button
+                        type="submit"
+                        class="btn save"
+                    >
+                        💾 Save Changes
+                    </button>
+
+                    <a
+                        href="/family-details/{{ family['id'] }}"
+                        class="btn cancel"
+                    >
+                        ✖ Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
