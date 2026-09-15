@@ -1,775 +1,976 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>Mera Bhiriya | Village Portal</title>
+    <title>Mera Bhiriya | Digital Village Portal</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
 
     <style>
+        /* =========================================
+           BHIRIYA HOME PAGE
+        ========================================= */
 
-        /* ================= NAVIGATION KEYS ================= */
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        /* =========================================
+           NAVBAR
+        ========================================= */
+
+        .navbar {
+            width: 100%;
+            background: #ffffff;
+            padding: 15px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #176b3a;
+            text-decoration: none;
+        }
 
         .nav-links {
             display: flex;
-            gap: 10px;
+            gap: 22px;
             align-items: center;
             flex-wrap: wrap;
         }
 
-        .nav-links .key {
-            display: inline-block;
-            padding: 10px 16px;
-            background: #ffffff;
-            color: #222;
+        .nav-links a {
             text-decoration: none;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            box-shadow: 0 3px 0 #aaa;
-            transition: 0.2s;
+            color: #333;
+            font-weight: 600;
+            transition: 0.3s;
         }
 
-        .nav-links .key:hover {
-            transform: translateY(2px);
-            box-shadow: 0 1px 0 #aaa;
+        .nav-links a:hover {
+            color: #176b3a;
         }
 
-        /* Google Form Button */
+        /* =========================================
+           HERO
+        ========================================= */
 
-        .google-form-button {
-            background: #166534 !important;
-            color: white !important;
-            border-color: #166534 !important;
-            box-shadow: 0 3px 0 #14532d !important;
+        .hero {
+            background: linear-gradient(
+                135deg,
+                #eaf8ef,
+                #ffffff
+            );
+            padding-bottom: 50px;
         }
 
-        .google-form-button:hover {
-            background: #15803d !important;
+        .hero-image {
+            width: 100%;
+            overflow: hidden;
+            background: #ddd;
         }
 
-        .form-submit-card {
-            border: 2px solid #16a34a;
+        .hero-image img {
+            width: 100%;
+            height: 560px;
+            object-fit: cover;
+            object-position: center;
+            display: block;
         }
 
-        .form-submit-card .btn {
-            background: #16a34a;
+        .hero-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 45px 25px 20px;
+            text-align: center;
+        }
+
+        .welcome {
+            font-size: 18px;
+            letter-spacing: 4px;
+            color: #176b3a;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .hero h1 {
+            font-size: 65px;
+            margin: 5px 0;
+            color: #14532d;
+            letter-spacing: 3px;
+        }
+
+        .hero h2 {
+            font-size: 30px;
+            margin: 10px 0 18px;
+            color: #333;
+        }
+
+        .hero p:not(.welcome) {
+            font-size: 18px;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .buttons {
+            margin-top: 28px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 13px 24px;
+            border-radius: 10px;
+            background: #176b3a;
             color: white;
+            font-weight: bold;
+            transition: 0.3s;
         }
 
-        .form-submit-card .btn:hover {
-            background: #15803d;
+        .btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
         }
 
-        /* Mobile */
+        .complaint-button {
+            background: #c0392b;
+        }
 
-        @media (max-width: 768px) {
+        /* =========================================
+           GENERAL SECTION
+        ========================================= */
+
+        .section {
+            max-width: 1150px;
+            margin: auto;
+            padding: 70px 25px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 35px;
+            color: #14532d;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 17px;
+            margin-bottom: 40px;
+        }
+
+        /* =========================================
+           ABOUT VILLAGE
+        ========================================= */
+
+        .about-box {
+            background: white;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+        }
+
+        .about-box p {
+            font-size: 17px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .location-grid {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .location-card {
+            background: #f3faf5;
+            padding: 25px 15px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #dcefe2;
+        }
+
+        .location-card .icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .location-card h3 {
+            margin: 5px 0;
+            color: #176b3a;
+        }
+
+        .location-card p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        /* =========================================
+           SERVICES
+        ========================================= */
+
+        .services {
+            background: #ffffff;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .service-card {
+            background: #f8faf9;
+            border-radius: 18px;
+            padding: 30px 22px;
+            text-align: center;
+            border: 1px solid #e2e8e4;
+            transition: 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .service-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .service-card h3 {
+            color: #176b3a;
+            margin: 10px 0;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .service-card a {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            background: #176b3a;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        /* =========================================
+           NOTICE BOARD
+        ========================================= */
+
+        .notice-section {
+            background: #f5f7fb;
+        }
+
+        .notice-box {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.06);
+            border-left: 5px solid #176b3a;
+        }
+
+        .notice-box h3 {
+            margin-top: 0;
+            color: #176b3a;
+        }
+
+        .notice-box p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .notice-date {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .no-notice {
+            background: white;
+            text-align: center;
+            padding: 35px;
+            border-radius: 15px;
+            color: #777;
+        }
+
+        /* =========================================
+           CONTACT
+        ========================================= */
+
+        .contact-section {
+            background: #ffffff;
+        }
+
+        .contact-box {
+            max-width: 800px;
+            margin: auto;
+            background: #f7faf8;
+            padding: 35px;
+            border-radius: 18px;
+            text-align: center;
+        }
+
+        .contact-box p {
+            font-size: 17px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        footer {
+            background: #123d25;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        footer h3 {
+            margin-top: 0;
+        }
+
+        footer p {
+            margin: 8px 0;
+            color: #d8e8dc;
+        }
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            .location-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .service-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-image img {
+                height: 450px;
+            }
+
+            .hero h1 {
+                font-size: 52px;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+            }
 
             .nav-links {
                 justify-content: center;
+                gap: 12px;
             }
 
-            .nav-links .key {
-                padding: 8px 12px;
+            .nav-links a {
                 font-size: 14px;
             }
 
+            .hero-image img {
+                height: 330px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero h2 {
+                font-size: 24px;
+            }
+
+            .welcome {
+                font-size: 15px;
+            }
+
+            .location-grid,
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 50px 18px;
+            }
+
+            .section-title {
+                font-size: 29px;
+            }
+
+            .about-box {
+                padding: 25px 18px;
+            }
         }
-
     </style>
-
 </head>
-
 
 <body>
 
+    <!-- =========================================
+         NAVBAR
+    ========================================= -->
 
-<!-- =====================================================
-     NAVBAR
-===================================================== -->
+    <nav class="navbar">
 
-<header class="navbar">
-
-    <div class="logo">
-        🏡 Mera Bhiriya
-    </div>
-
-
-    <nav class="nav-links">
-
-        <a href="/" class="key">
-            🏠 Home
+        <a href="/" class="logo">
+            🏡 Mera Bhiriya
         </a>
 
-        <a href="/#about" class="key">
-            🏡 Gaon Ki Jankari
-        </a>
+        <div class="nav-links">
 
-        <a href="/#services" class="key">
-            ⚙️ Services
-        </a>
+            <a href="/">
+                Home
+            </a>
 
-        <a href="/complaint" class="key">
-            📢 Complaint
-        </a>
+            <a href="/#about">
+                Gaon Ki Jankari
+            </a>
 
-        <a href="/#notices" class="key">
-            📋 Notices
-        </a>
+            <a href="/#services">
+                Services
+            </a>
 
-        <a href="/#contact" class="key">
-            📞 Contact
-        </a>
+            <a href="/families">
+                Family Data
+            </a>
 
-        <!-- GOOGLE FORM BUTTON -->
+            <a href="/complaint">
+                Complaint
+            </a>
 
-        <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSf_RuGeQi0lAY854gbRPZISqMjN-YxEWgyOJQ12HCwgZVP4vg/viewform?usp=sharing&ouid=100077409369973861881"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="key google-form-button"
-        >
-            📝 Family Data Submit
-        </a>
+            <a href="/track">
+                Track Complaint
+            </a>
+
+            <a href="/#notices">
+                Notices
+            </a>
+
+            <a href="/#contact">
+                Contact
+            </a>
+
+        </div>
 
     </nav>
 
-</header>
+
+    <!-- =========================================
+         HERO SECTION
+    ========================================= -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-image">
+
+            <img
+                src="{{ url_for('static', filename='images/village-bhiriya.png') }}"
+                alt="Bhiriya Village - Chnadan Lal Baba Mandir"
+            >
+
+        </div>
 
 
+        <div class="hero-content">
 
-<!-- =====================================================
-     HERO
-===================================================== -->
+            <p class="welcome">
+                WELCOME TO
+            </p>
 
-<section class="hero" id="home">
+            <h1>
+                BHIRIYA
+            </h1>
 
-    <div class="hero-content">
+            <h2>
+                Digital Village Portal
+            </h2>
 
-        <p class="welcome">
-            WELCOME TO
-        </p>
+            <p>
+                Bhiriya gaon ki jankari, family information,
+                complaints aur important updates ek hi jagah.
+            </p>
 
-        <h1>
-            BHIRIYA
-        </h1>
 
-        <h2>
-            Digital Village Portal
+            <div class="buttons">
+
+                <a
+                    href="#about"
+                    class="btn"
+                >
+                    🏘️ Gaon Ki Jankari
+                </a>
+
+
+                <a
+                    href="/complaint"
+                    class="btn complaint-button"
+                >
+                    📢 Complaint Karein
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         ABOUT / VILLAGE INFORMATION
+    ========================================= -->
+
+    <section
+        class="section"
+        id="about"
+    >
+
+        <h2 class="section-title">
+            🏘️ Bhiriya Village Information
         </h2>
 
-        <p>
-            Bhiriya gaon ki jankari, family information,
-            complaints aur important updates ek hi jagah.
+        <p class="section-subtitle">
+            Hamare gaon Bhiriya ki basic aur important jankari
         </p>
 
 
-        <div class="buttons">
-
-            <a
-                href="#about"
-                class="btn"
-            >
-                🏘️ Gaon Ki Jankari
-            </a>
-
-
-            <a
-                href="/complaint"
-                class="btn complaint-button"
-            >
-                📢 Complaint Karein
-            </a>
-
-
-            <!-- GOOGLE FORM -->
-
-            <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSf_RuGeQi0lAY854gbRPZISqMjN-YxEWgyOJQ12HCwgZVP4vg/viewform?usp=sharing&ouid=100077409369973861881"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn"
-            >
-                📝 Family Data Submit
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     LOCATION
-===================================================== -->
-
-<section class="location">
-
-    <h2>
-        📍 Bhiriya Ki Location
-    </h2>
-
-
-    <div class="location-grid">
-
-
-        <div class="card">
-
-            <span>🏡</span>
-
-            <h3>
-                Village
-            </h3>
+        <div class="about-box">
 
             <p>
-                Bhiriya
+                <strong>Bhiriya</strong> Uttar Pradesh ke
+                Hardoi district ka ek gaon hai.
+                Yeh portal Bhiriya gaon ke residents ke liye
+                important information aur digital services
+                ek hi jagah provide karne ke purpose se banaya gaya hai.
             </p>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <span>🏢</span>
-
-            <h3>
-                Tehsil
-            </h3>
 
             <p>
-                Shahabad
+                Is portal ke through gaon ki basic information,
+                family information, complaints, notices aur
+                important updates ko easily access kiya ja sakta hai.
             </p>
+
+
+            <div class="location-grid">
+
+                <div class="location-card">
+
+                    <div class="icon">
+                        🏡
+                    </div>
+
+                    <h3>
+                        Village
+                    </h3>
+
+                    <p>
+                        Bhiriya
+                    </p>
+
+                </div>
+
+
+                <div class="location-card">
+
+                    <div class="icon">
+                        📍
+                    </div>
+
+                    <h3>
+                        Tehsil
+                    </h3>
+
+                    <p>
+                        Shahabad
+                    </p>
+
+                </div>
+
+
+                <div class="location-card">
+
+                    <div class="icon">
+                        🏢
+                    </div>
+
+                    <h3>
+                        Block
+                    </h3>
+
+                    <p>
+                        Pihani
+                    </p>
+
+                </div>
+
+
+                <div class="location-card">
+
+                    <div class="icon">
+                        🗺️
+                    </div>
+
+                    <h3>
+                        District
+                    </h3>
+
+                    <p>
+                        Hardoi
+                    </p>
+
+                </div>
+
+            </div>
 
         </div>
 
+    </section>
 
 
-        <div class="card">
+    <!-- =========================================
+         SERVICES
+    ========================================= -->
 
-            <span>🏛️</span>
+    <section
+        class="section services"
+        id="services"
+    >
 
-            <h3>
-                Block
-            </h3>
-
-            <p>
-                Pihani
-            </p>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <span>🗺️</span>
-
-            <h3>
-                District
-            </h3>
-
-            <p>
-                Hardoi
-            </p>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     ABOUT
-===================================================== -->
-
-<section
-    class="about"
-    id="about"
->
-
-    <div class="heading">
-
-        <p>
-            ABOUT OUR VILLAGE
-        </p>
-
-        <h2>
-            🏡 Bhiriya Ke Baare Mein
+        <h2 class="section-title">
+            🛠️ Village Services
         </h2>
 
-    </div>
-
-
-    <div class="about-box">
-
-        <p>
-
-            Bhiriya Uttar Pradesh ke Hardoi district ke
-            Shahabad tehsil aur Pihani development block
-            ke kshetra mein sthit hamara gaon hai.
-
+        <p class="section-subtitle">
+            Bhiriya residents ke liye available digital services
         </p>
 
 
-        <p>
+        <div class="service-grid">
 
-            Is portal ka purpose gaon ki basic information,
-            family records, complaints aur important
-            announcements ko ek digital platform par
-            lana hai.
+            <!-- Family Data -->
 
-        </p>
+            <div class="service-card">
 
-    </div>
+                <div class="service-icon">
+                    👨‍👩‍👧‍👦
+                </div>
 
-</section>
+                <h3>
+                    Family Data
+                </h3>
 
+                <p>
+                    Bhiriya village ki available family information
+                    ko view kar sakte hain.
+                </p>
 
+                <a href="/families">
+                    View Families
+                </a>
 
-<!-- =====================================================
-     SERVICES
-===================================================== -->
-
-<section
-    class="services"
-    id="services"
->
-
-    <div class="heading">
-
-        <p>
-            OUR SERVICES
-        </p>
-
-        <h2>
-            🌐 Gaon Ki Services
-        </h2>
-
-    </div>
-
-
-    <div class="service-grid">
-
-
-        <!-- 1 -->
-
-        <div class="service-card">
-
-            <div class="icon">
-                🏘️
             </div>
 
-            <h3>
-                Gaon Ki Jankari
-            </h3>
 
-            <p>
-                Bhiriya ke baare mein important
-                information dekhein.
-            </p>
+            <!-- Add Family -->
 
-            <a
-                href="#about"
-                class="btn"
-            >
-                View Details
-            </a>
+            <div class="service-card">
+
+                <div class="service-icon">
+                    📝
+                </div>
+
+                <h3>
+                    Family Submit
+                </h3>
+
+                <p>
+                    Apni family ki basic information submit
+                    karne ke liye form use karein.
+                </p>
+
+                <a href="/family">
+                    Submit Family
+                </a>
+
+            </div>
+
+
+            <!-- Complaint -->
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    📢
+                </div>
+
+                <h3>
+                    Complaint
+                </h3>
+
+                <p>
+                    Road, water, electricity, cleanliness,
+                    street light aur other problems report karein.
+                </p>
+
+                <a href="/complaint">
+                    Complaint Karein
+                </a>
+
+            </div>
+
+
+            <!-- Track Complaint -->
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    🔎
+                </div>
+
+                <h3>
+                    Track Complaint
+                </h3>
+
+                <p>
+                    Complaint ID ke through apni complaint
+                    ka current status check karein.
+                </p>
+
+                <a href="/track">
+                    Track Now
+                </a>
+
+            </div>
+
+
+            <!-- Notices -->
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    📋
+                </div>
+
+                <h3>
+                    Notice Board
+                </h3>
+
+                <p>
+                    Village ke important announcements
+                    aur notices yahan dekhein.
+                </p>
+
+                <a href="#notices">
+                    View Notices
+                </a>
+
+            </div>
+
+
+            <!-- Admin -->
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    🔐
+                </div>
+
+                <h3>
+                    Admin Panel
+                </h3>
+
+                <p>
+                    Authorized admin village data,
+                    complaints aur notices manage kar sakta hai.
+                </p>
+
+                <a href="/admin">
+                    Admin Login
+                </a>
+
+            </div>
 
         </div>
 
+    </section>
 
 
-        <!-- 2 -->
+    <!-- =========================================
+         NOTICE BOARD
+    ========================================= -->
 
-        <div class="service-card">
+    <section
+        class="section notice-section"
+        id="notices"
+    >
 
-            <div class="icon">
-                👨‍👩‍👧‍👦
-            </div>
-
-            <h3>
-                Family Data
-            </h3>
-
-            <p>
-                Bhiriya ke registered parivaron ki
-                basic information admin ke through
-                manage ki jaati hai.
-            </p>
-
-            <a
-                href="/admin"
-                class="btn"
-            >
-                Admin Login
-            </a>
-
-        </div>
-
-
-
-        <!-- 3 GOOGLE FORM -->
-
-        <div class="service-card form-submit-card">
-
-            <div class="icon">
-                📝
-            </div>
-
-            <h3>
-                Apna Family Data Submit
-            </h3>
-
-            <p>
-                Apne parivar ki basic information
-                Google Form ke through submit karein.
-            </p>
-
-            <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSf_RuGeQi0lAY854gbRPZISqMjN-YxEWgyOJQ12HCwgZVP4vg/viewform?usp=sharing&ouid=100077409369973861881"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn"
-            >
-                📝 Open Google Form
-            </a>
-
-        </div>
-
-
-
-        <!-- 4 -->
-
-        <div class="service-card">
-
-            <div class="icon">
-                📢
-            </div>
-
-            <h3>
-                Complaint
-            </h3>
-
-            <p>
-                Road, water, electricity,
-                cleanliness aur other problems
-                ki complaint karein.
-            </p>
-
-            <br>
-
-            <a
-                href="/complaint"
-                class="btn"
-            >
-                📢 Complaint Karein
-            </a>
-
-        </div>
-
-
-
-        <!-- 5 -->
-
-        <div class="service-card">
-
-            <div class="icon">
-                🔎
-            </div>
-
-            <h3>
-                Track Complaint
-            </h3>
-
-            <p>
-                Complaint ID se apni complaint ka
-                current status check karein.
-            </p>
-
-            <br>
-
-            <a
-                href="/track"
-                class="btn"
-            >
-                🔎 Track Complaint
-            </a>
-
-        </div>
-
-
-
-        <!-- 6 -->
-
-        <div class="service-card">
-
-            <div class="icon">
-                📋
-            </div>
-
-            <h3>
-                Notice Board
-            </h3>
-
-            <p>
-                Bhiriya ke latest notices aur
-                important announcements dekhein.
-            </p>
-
-            <a
-                href="#notices"
-                class="btn"
-            >
-                📋 View Notices
-            </a>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     NOTICE BOARD
-===================================================== -->
-
-<section
-    class="about"
-    id="notices"
->
-
-    <div class="heading">
-
-        <p>
-            IMPORTANT UPDATES
-        </p>
-
-        <h2>
+        <h2 class="section-title">
             📋 Bhiriya Notice Board
         </h2>
 
-    </div>
-
-
-    <div class="service-grid">
+        <p class="section-subtitle">
+            Village ke important announcements aur updates
+        </p>
 
 
         {% if notices %}
 
-
             {% for notice in notices %}
 
-            <div class="service-card">
+                <div class="notice-box">
 
-                <div class="icon">
-                    📢
+                    <h3>
+                        📢 {{ notice.title }}
+                    </h3>
+
+                    <p>
+                        {{ notice.description }}
+                    </p>
+
+                    {% if notice.created_at %}
+
+                        <div class="notice-date">
+                            📅 {{ notice.created_at }}
+                        </div>
+
+                    {% endif %}
+
                 </div>
-
-
-                <h3>
-                    {{ notice["title"] }}
-                </h3>
-
-
-                <p>
-                    {{ notice["description"] }}
-                </p>
-
-
-                <small>
-                    📅 Published:
-                    {{ notice["created_at"] }}
-                </small>
-
-            </div>
 
             {% endfor %}
 
-
         {% else %}
 
-
-            <div class="about-box">
+            <div class="no-notice">
 
                 <h3>
-                    📭 No Notices
+                    📋 No Notices Available
                 </h3>
 
                 <p>
-                    Abhi Bhiriya ke liye koi latest
-                    notice available nahi hai.
+                    Abhi village ke liye koi new notice available nahi hai.
                 </p>
 
             </div>
 
-
         {% endif %}
 
-
-    </div>
-
-</section>
+    </section>
 
 
+    <!-- =========================================
+         CONTACT
+    ========================================= -->
 
-<!-- =====================================================
-     COMPLAINT
-===================================================== -->
+    <section
+        class="section contact-section"
+        id="contact"
+    >
 
-<section class="complaint">
-
-    <div class="heading">
-
-        <p>
-            VILLAGE COMPLAINT
-        </p>
-
-        <h2>
-            📢 Apni Complaint Karein
+        <h2 class="section-title">
+            📞 Contact
         </h2>
 
-    </div>
-
-
-    <div class="complaint-box">
-
-        <h3>
-            Bhiriya Ki Problem Report Karein
-        </h3>
-
-        <p>
-            Road, water, electricity, cleanliness,
-            street light ya kisi bhi village problem
-            ko report karein.
+        <p class="section-subtitle">
+            Bhiriya Digital Village Portal
         </p>
 
-        <br>
+
+        <div class="contact-box">
+
+            <p>
+                🏡 <strong>Village:</strong> Bhiriya
+            </p>
+
+            <p>
+                📍 <strong>Tehsil:</strong> Shahabad
+            </p>
+
+            <p>
+                🏢 <strong>Block:</strong> Pihani
+            </p>
+
+            <p>
+                🗺️ <strong>District:</strong> Hardoi
+            </p>
+
+            <p>
+                🇮🇳 <strong>State:</strong> Uttar Pradesh
+            </p>
+
+        </div>
+
+    </section>
 
 
-        <a
-            href="/complaint"
-            class="btn"
-        >
-            📝 Submit Complaint
-        </a>
+    <!-- =========================================
+         FOOTER
+    ========================================= -->
 
-
-        <a
-            href="/track"
-            class="btn"
-        >
-            🔎 Track Complaint
-        </a>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     CONTACT
-===================================================== -->
-
-<section
-    class="contact"
-    id="contact"
->
-
-    <div class="heading">
-
-        <p>
-            CONTACT
-        </p>
-
-        <h2>
-            📞 Important Contact
-        </h2>
-
-    </div>
-
-
-    <div class="contact-box">
+    <footer>
 
         <h3>
             🏡 Mera Bhiriya
         </h3>
 
-
         <p>
-            <strong>Village:</strong>
-            Bhiriya
+            Digital Village Portal
         </p>
 
-
         <p>
-            <strong>Tehsil:</strong>
-            Shahabad
+            Bhiriya, Shahabad, Pihani, Hardoi, Uttar Pradesh
         </p>
 
-
         <p>
-            <strong>Block:</strong>
-            Pihani
+            © 2026 Mera Bhiriya. All Rights Reserved.
         </p>
 
-
-        <p>
-            <strong>District:</strong>
-            Hardoi
-        </p>
-
-
-        <p>
-            <strong>State:</strong>
-            Uttar Pradesh
-        </p>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer>
-
-    <h3>
-        🏡 Mera Bhiriya
-    </h3>
-
-
-    <p>
-        Digital Village Information & Complaint Portal
-    </p>
-
-
-    <p>
-        © 2026 Mera Bhiriya
-    </p>
-
-</footer>
-
+    </footer>
 
 
 </body>
-
 </html>

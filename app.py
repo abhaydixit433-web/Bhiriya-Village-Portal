@@ -7,7 +7,7 @@ import json
 import urllib.parse
 import urllib.request
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static", static_url_path="/static", template_folder="templates")
 app.secret_key = "bhiriya-admin-secret-key-2026"
 
 DATABASE = "village.db"
@@ -203,6 +203,17 @@ body{
 }
 a{text-decoration:none;color:inherit}
 .container{width:min(1180px,92%);margin:auto}
+.developer-banner{
+    width:100%;
+    text-align:center;
+    padding:10px 14px;
+    background:#0c2017;
+    color:#e6c66b;
+    border-bottom:1px solid rgba(255,255,255,.10);
+    font-size:14px;
+    font-weight:800;
+    letter-spacing:.2px;
+}
 .nav{
     position:sticky;
     top:0;
@@ -515,6 +526,8 @@ def page(title, content):
 </head>
 <body>
 
+<div class="developer-banner">🌐 This Website Developed by Abhay Dixit</div>
+
 <nav class="nav">
     <div class="container nav-inner">
         <a class="logo" href="/">🏡 Mera <span>Bhiriya</span></a>
@@ -592,6 +605,10 @@ def home():
 
     content = f"""
 <section class="hero">
+  <div class="container" style="margin-bottom:30px">
+    <img src="/static/images/village-bhiriya.png" alt="Bhiriya Village - Chnadan Lal Baba Mandir" style="width:100%;height:520px;object-fit:cover;border-radius:24px;border:1px solid var(--line);box-shadow:var(--shadow);display:block">
+  </div>
+
   <div class="container hero-grid">
     <div>
       <div class="badge">🌿 Digital Village Portal</div>
